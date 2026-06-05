@@ -162,15 +162,12 @@ def search_songs(
     """Return songs matching the query on a given field."""
     if not query:
         return songs
-
     q = query.lower().strip()
     filtered: List[Song] = []
-
     for song in songs:
         value = str(song.get(field, "")).lower()
-        if value and value in q:
+        if value and q in value:  # ✅ fixed
             filtered.append(song)
-
     return filtered
 
 
